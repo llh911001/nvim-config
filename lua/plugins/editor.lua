@@ -57,6 +57,11 @@ return {
       },
       { "<leader>,", false }, -- <leader>, will be used to format, @see config/keymaps.lua
     },
+    opts = {
+      oldfiles = {
+        cwd_only = true,
+      },
+    },
   },
 
   {
