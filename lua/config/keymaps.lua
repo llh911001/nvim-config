@@ -49,3 +49,24 @@ map("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
 -- Alternative copy/paste
 map("x", "<leader>c", '"_c', { desc = "Copy without having your register overwritten" })
 map("x", "<leader>p", '"_dP', { desc = "Paste without having your register overwritten" })
+
+-- Function to convert snake_case to camelCase
+local function snake_to_camel()
+  -- Get the visual selection
+  local start_line, start_col = vim.fn.line("'<"), vim.fn.col("'<")
+  local end_line, end_col = vim.fn.line("'>"), vim.fn.col("'>")
+  -- Get the selected text
+  local lines = vim.fn.getline(start_line, end_line)
+  local selected_text = lines[1]:sub(start_col, end_col)
+  -- Convert snake_case to camelCase
+  local camel_text = selected_text:gsub("_(%l)", function(c)
+    return c:upper()
+  end)
+  -- Replace the selected text
+  vim.api.nvim_buf_set_text(0, start_line - 1, start_col - 1, end_line - 1, end_col, { camel_text })
+end
+
+-- Create a direct mapping for visual mode
+map("x", "<leader>sc", function()
+  snake_to_camel()
+end, { noremap = true, silent = true, desc = "Convert snake_case to camelCase" })
