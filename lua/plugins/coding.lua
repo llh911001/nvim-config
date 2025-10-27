@@ -24,4 +24,26 @@ return {
       },
     },
   },
+
+  -- formatting
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters = {
+        prettier = {
+          prepend_args = { "--single-quote" },
+        },
+      },
+    },
+  },
+
+  -- linting
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        markdown = {}, -- disable markdown lint
+      },
+    },
+  },
 }

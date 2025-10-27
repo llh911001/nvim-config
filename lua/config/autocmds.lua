@@ -14,3 +14,12 @@ vim.api.nvim_create_autocmd("BufRead", {
     end
   end,
 })
+
+vim.api.nvim_create_augroup("markdown_spell", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },
+  group = "markdown_spell",
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
